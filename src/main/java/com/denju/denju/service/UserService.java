@@ -2,19 +2,25 @@ package com.denju.denju.service;
 
 import com.denju.denju.dto.UserRequestDTO;
 import com.denju.denju.dto.UserResponseDTO;
+import lombok.RequiredArgsConstructor;
+import com.denju.denju.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import com.denju.denju.entities.Usuario;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    private Long contadorId = 1L;
+
+    private final UserRepository userRepository;
 
     public UserResponseDTO criarUsuario(UserRequestDTO request) {
+        Usuario usuario = Usuario.builder()
+                .nome(request.nome())
+                .senha(request.senha())
+                .build();
 
-        UserResponseDTO response =
-                new UserResponseDTO(contadorId, request.getNome());
+        Usuario salvo = userRepository.save(usuario);
 
-        contadorId++;
-
-        return response;
+        return new UserResponseDTO(salvo.getId(), salvo.getNome());
     }
 }

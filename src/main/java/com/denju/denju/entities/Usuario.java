@@ -1,15 +1,16 @@
-package com.denju.denju.entitys;
+package com.denju.denju.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "usuario")
+@Table(name = "usuarios")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Builder
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
